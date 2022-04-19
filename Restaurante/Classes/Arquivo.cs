@@ -20,7 +20,7 @@ namespace Restaurante.Classes
 
             foreach (var retorno in retornoCaminho)
             {
-                System.Console.WriteLine(retorno);
+                Console.WriteLine(retorno);
             }
 
         }
@@ -40,7 +40,6 @@ namespace Restaurante.Classes
 
 
         }
-
 
 
 
