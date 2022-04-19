@@ -1,8 +1,10 @@
-﻿using Restaurante.Classes;
-using System;
+﻿using System;
+using Restaurante.Classes;
 using System.Collections.Generic;
 using System.IO;
-
+using System.Text;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace Restaurante
 {
@@ -40,16 +42,25 @@ namespace Restaurante
             Comanda comanda1 = new Comanda(1, atendente1);
             comanda1.AbrirComanda();
             comanda1.AdicionarPedidos(Pedidos);
-            comanda1.EfetuarPagamento(100.0M);
-            comanda1.FecharComanda();
-            comanda1.ImprimirComanda();
-
+            comanda1.EfetuarPagamento(1100.0M);
+            comanda1.FecharComanda();            
+            Console.WriteLine(comanda1);
+         
+            
+            Arquivo arquivo = new Arquivo();
+      
+            string caminho = ("D:\\Arquivos\\arquivo-teste.txt");     
+            arquivo.EscreverArquivoStream(caminho, comanda1.ToString());
+              
+            
         }
+          
 
         public static void Escrever(string nomeProduto, decimal valorItemPedido)
         {
             Console.WriteLine(nomeProduto + " - " + valorItemPedido);
         }
+
 
     }
 }

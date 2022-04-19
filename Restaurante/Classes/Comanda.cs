@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Restaurante.Classes
 {
@@ -111,19 +112,48 @@ namespace Restaurante.Classes
             return !aberta;
         }
 
-        public void ImprimirComanda()
+        //public void ImprimirComanda()
+        //{
+        //    Console.WriteLine("----------------------");
+        //    foreach (var item in pedidos)
+        //    {
+        //        foreach (var item2 in item.Produtos)
+        //        {
+        //            Console.WriteLine($"{item2.Produto.Nome} - {item2.Quantidade} - {item2.ValorItemPedido()}");
+        //        }
+        //    }
+
+        //    Console.WriteLine($"Valor: {ValorFinal()}");
+        //    Console.WriteLine($"Valor Pago: {valorPago}");
+
+
+        //}
+
+        public override string ToString()
         {
+            StringBuilder newString = new StringBuilder();
+           
+            newString.Append('-', 20);
+            newString.AppendLine();
+
             foreach (var item in pedidos)
             {
                 foreach (var item2 in item.Produtos)
                 {
-                    Console.WriteLine($"{item2.Produto.Nome} - {item2.Quantidade} - {item2.ValorItemPedido()}");
+                   
+                    newString.AppendFormat("{0} - {1} - {2}", item2.Produto.Nome, item2.Quantidade, item2.ValorItemPedido());
+                    newString.AppendLine();
+                    
                 }
+
             }
+            newString.Append('-', 20);
+            newString.AppendLine();
+            newString.AppendLine("Valor: " + ValorFinal());
+            newString.AppendLine("Valor Pago: " + valorPago);
 
-            Console.WriteLine($"Valor: {ValorFinal()}");
-            Console.WriteLine($"Valor Pago: {valorPago}");
-
+            return newString.ToString();
+            
 
         }
 
