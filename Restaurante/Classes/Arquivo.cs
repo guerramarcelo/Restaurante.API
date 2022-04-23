@@ -9,11 +9,6 @@ namespace Restaurante.Classes
 {
     public class Arquivo
     {
-        public void CriarArquivo(string caminho, string conteudo)
-        {
-            File.WriteAllText(caminho, conteudo);
-        }
-
         public void ListarDiretorios(string caminho)
         {
             var retornoCaminho = Directory.GetDirectories(caminho);
@@ -25,25 +20,34 @@ namespace Restaurante.Classes
 
         }
 
-        public void EscreverArquivoStream(string caminho, string conteudo)
+        
+
+        public void CriarArquivoStream(string caminho, object conteudo)
         {
-            List<string> linhas = new List<string>();
-            linhas = File.ReadAllLines(caminho).ToList();
-
-            foreach (var linha in conteudo)
+            if (!File.Exists(caminho))
             {
-                Console.WriteLine(linha);
+                
+                var temp = conteudo.ToString();
+                List<string> linhas = new List<string>();
+
+                foreach (var linha in temp)
+                {
+                    Console.Write(linha);
+                }
+                linhas.Add(temp);
+
+                using (var stream = File.CreateText(caminho))
+                {
+                    foreach (var linha in temp)
+                    {
+                        stream.Write(linha);
+                    }
+                }
+
             }
-
-            linhas.Add(conteudo.ToString());
-            File.WriteAllLines(caminho, linhas);
-
-
         }
 
-
-
-
+  
 
     }
 

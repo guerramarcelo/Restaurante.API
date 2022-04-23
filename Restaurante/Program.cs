@@ -43,23 +43,31 @@ namespace Restaurante
             comanda1.AbrirComanda();
             comanda1.AdicionarPedidos(Pedidos);
             comanda1.EfetuarPagamento(1100.0M);
-            comanda1.FecharComanda();            
+            comanda1.FecharComanda();
             Console.WriteLine(comanda1);
-         
-            
-            Arquivo arquivo = new Arquivo();
-      
-            string caminho = ("D:\\Arquivos\\arquivo-teste.txt");     
-            arquivo.EscreverArquivoStream(caminho, comanda1.ToString());
-              
-            
+
+
+            Console.WriteLine("------------");
+            Console.WriteLine("Digite o nome do arquivo que deseja salvar");
+            string nome = Console.ReadLine() + ".txt";
+            string path = "D:\\Arquivos";
+            string caminho = Path.Combine(path, nome);
+            Arquivo arquivo = new Arquivo();            
+            arquivo.CriarArquivoStream(caminho, comanda1);
+
+
+
+
+
         }
-          
+
+
 
         public static void Escrever(string nomeProduto, decimal valorItemPedido)
         {
             Console.WriteLine(nomeProduto + " - " + valorItemPedido);
         }
+
 
 
     }
