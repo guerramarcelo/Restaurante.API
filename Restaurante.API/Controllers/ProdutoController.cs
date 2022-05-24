@@ -10,7 +10,7 @@ namespace RestauranteAPI.Controllers
 
     public class ProdutoController : Controller
     {
-        static List<Produto> produtos;
+        public static List<Produto> produtos;
 
         public ProdutoController()
         {
@@ -74,14 +74,14 @@ namespace RestauranteAPI.Controllers
         {
             var produto = produtos.FirstOrDefault(produto => produto.Id == id);
 
-            if (produto == null)
-                return NotFound();
+            return Ok(produto);
 
-            produtos.Remove(produto);
 
-            return Ok();
         }
 
 
     }
+
+    
+    
 }
