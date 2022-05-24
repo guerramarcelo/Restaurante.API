@@ -11,7 +11,7 @@ namespace Restaurante
     class Program
     {
         static void Main(string[] args)
-        {
+        {                       
 
             //instanciei 3 produtos
             Produto produto1 = new Produto("Cerveja", 8.0M, Produto.TipoProdutoEnum.Bebida);
@@ -42,20 +42,18 @@ namespace Restaurante
             Comanda comanda1 = new Comanda(1, atendente1);
             comanda1.AbrirComanda();
             comanda1.AdicionarPedidos(Pedidos);
-            comanda1.EfetuarPagamento(1100.0M);
+            comanda1.EfetuarPagamento(132.0M);
             comanda1.FecharComanda();
             Console.WriteLine(comanda1);
 
 
-            Console.WriteLine("------------");
-            Console.WriteLine("Digite o nome do arquivo que deseja salvar");
-            string nome = Console.ReadLine() + ".txt";
-            string path = "D:\\Arquivos";
-            string caminho = Path.Combine(path, nome);
-            Arquivo arquivo = new Arquivo();            
-            arquivo.CriarArquivoStream(caminho, comanda1);
-
-
+            //Console.WriteLine("------------");
+            //Console.WriteLine("Digite o nome do arquivo que deseja salvar");
+            //string nome = Console.ReadLine() + ".txt";
+            //string path = "D:\\Arquivos";
+            //string caminho = Path.Combine(path, nome);
+            //Arquivo arquivo = new Arquivo();            
+            //arquivo.CriarArquivoStream(caminho, comanda1);
 
 
 

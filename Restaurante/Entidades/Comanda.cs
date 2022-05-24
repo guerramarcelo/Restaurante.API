@@ -7,28 +7,33 @@ namespace Restaurante.Classes
 {
     public class Comanda
     {
-        private Guid id;
-        private Atendente atendente;
-        private int nrMesa;
-        private decimal valorPago;
-        private bool aberta;
+        public Guid Id { get; private set; }
+        public Atendente atendente { get; set; }
+        public int nrMesa { get; private set; }
+        public decimal ValorPago { get; private set; }
+        public bool aberta { get; private set; }
         private List<Pedido> pedidos;
+
 
 
         public Comanda(int nrMesa, Atendente atendente)
         {
-            id = Guid.NewGuid();
+            Id = Guid.NewGuid();
             this.nrMesa = nrMesa;
             this.atendente = atendente;
             pedidos = new List<Pedido>();
-            valorPago = 0.0M;
+            ValorPago = 0.0M;
             aberta = false;
 
         }
 
+
+
+
         public bool AbrirComanda()
         {
-            return aberta = true;
+            aberta = true;
+            return aberta;
         }
 
 
@@ -45,7 +50,7 @@ namespace Restaurante.Classes
 
         public void RemoverPedidos(Pedido pedido)
         {
-            if (!AbrirComanda())
+            if (!aberta)
             {
                 Console.WriteLine("Não é possível remover pedidos de uma comanda fechada!");
                 return;
@@ -78,38 +83,41 @@ namespace Restaurante.Classes
 
         public void EfetuarPagamento(decimal valor)
         {
-
-            if (valor > ValorFinal())
+            ValorPago += valor;
+            if (ValorPago > ValorFinal())
             {
-                Console.WriteLine($"Troco: R${valor - ValorFinal()}");
+                Console.WriteLine($"Troco: R${ValorPago - ValorFinal()}");
+                return;
             }
 
-            if (valor < ValorFinal())
+            if (ValorPago < ValorFinal())
             {
-                Console.WriteLine($"Valor restante: R${ValorFinal() - valor}");
+                Console.WriteLine($"Valor restante: R${ValorFinal() - ValorPago}");
             }
-
-            valorPago += valor;
 
         }
 
         public bool FecharComanda()
         {
-            if (!AbrirComanda())
+            if (!aberta)
             {
                 Console.WriteLine("A comanda ja está fechada!");
-                return AbrirComanda();
+                return aberta;
             }
 
-            if (valorPago >= ValorFinal())
+            if (ValorPago >= ValorFinal())
             {
                 Console.WriteLine("Comanda fechada com sucesso!");
-                return (!AbrirComanda());
+                return !aberta;
             }
 
             else
-                Console.WriteLine($"Valor pago: R$ {valorPago} é insuficiente para fechar a comanda!");
-            return !aberta;
+            {
+                Console.WriteLine($"Valor pago: R$ {ValorPago} é insuficiente para fechar a comanda!");
+                return false;
+            }
+            aberta = false;
+            return aberta;
         }
 
         //public void ImprimirComanda()
@@ -132,7 +140,7 @@ namespace Restaurante.Classes
         public override string ToString()
         {
             StringBuilder newString = new StringBuilder();
-           
+
             newString.Append('-', 20);
             newString.AppendLine();
 
@@ -140,20 +148,20 @@ namespace Restaurante.Classes
             {
                 foreach (var item2 in item.Produtos)
                 {
-                   
+
                     newString.AppendFormat("{0} - {1} - {2}", item2.Produto.Nome, item2.Quantidade, item2.ValorItemPedido());
                     newString.AppendLine();
-                    
+
                 }
 
             }
             newString.Append('-', 20);
             newString.AppendLine();
             newString.AppendLine("Valor: " + ValorFinal());
-            newString.AppendLine("Valor Pago: " + valorPago);
+            newString.AppendLine("Valor Pago: " + ValorPago);
 
             return newString.ToString();
-            
+
 
         }
 

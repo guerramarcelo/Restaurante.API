@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Restaurante.Classes
 {
     public class Produto
-    {
+    {        
 
         public Guid Id { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Restaurante.Classes
             Tipo = tipo;
 
         }
-
+          
 
         public string Nome { get; private set; }
 
