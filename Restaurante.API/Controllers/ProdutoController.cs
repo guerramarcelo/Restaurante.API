@@ -11,7 +11,6 @@ namespace RestauranteAPI.Controllers
     public class ProdutoController : Controller
     {
         public static List<Produto> produtos;
-
         public ProdutoController()
         {
             if (produtos == null)
@@ -25,7 +24,6 @@ namespace RestauranteAPI.Controllers
 
             if (string.IsNullOrEmpty(input.Nome))
                 errorOutput.AddError("Nome é obrigatório");
-
 
             if ((input.Preco == 0.0M))
                 errorOutput.AddError("Preço é obrigatório");
@@ -50,38 +48,24 @@ namespace RestauranteAPI.Controllers
             if (produto == null)
                 return NotFound();
 
-
             return Ok(produto);
-
         }
 
 
         [HttpGet()]
         public ActionResult GetProduto()
         {
-
             if (produtos == null || !produtos.Any())
                 return NoContent();
 
             return Ok(produtos);
         }
 
-
-
-
         [HttpDelete("{id}")]
         public ActionResult DeleteProduto(Guid id)
         {
             var produto = produtos.FirstOrDefault(produto => produto.Id == id);
-
             return Ok(produto);
-
-
         }
-
-
-    }
-
-    
-    
+    }    
 }

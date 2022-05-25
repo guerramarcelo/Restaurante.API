@@ -13,9 +13,7 @@ namespace Restaurante.Classes
         public decimal ValorPago { get; private set; }
         public bool Aberta { get; private set; }
         public List<Pedido> Pedidos { get; private set; }
-        public decimal Valor => ValorFinal(); 
-
-
+        public decimal Valor => ValorFinal();
 
         public Comanda(int nrMesa, Atendente atendente)
         {
@@ -25,11 +23,7 @@ namespace Restaurante.Classes
             Pedidos = new List<Pedido>();
             ValorPago = 0.0M;
             Aberta = false;
-
         }
-
-
-
 
         public bool AbrirComanda()
         {
@@ -37,21 +31,17 @@ namespace Restaurante.Classes
             return Aberta;
         }
 
-
         public void AdicionarPedidos(List<Pedido> lista)
         {
             foreach (var item in lista)
             {
                 Pedidos.Add(item);
-
             }
-
         }
 
         public void AdicionarPedido(Pedido pedido)
         {
-           Pedidos.Add(pedido);
-
+            Pedidos.Add(pedido);
         }
 
 
@@ -62,6 +52,7 @@ namespace Restaurante.Classes
                 Console.WriteLine("Não é possível remover pedidos de uma comanda fechada!");
                 return;
             }
+
             Pedidos.Remove(pedido);
         }
 
@@ -81,12 +72,10 @@ namespace Restaurante.Classes
             Atendente.PorcentagemComissao = ValorComissao();
         }
 
-
         public decimal ValorFinal()
         {
             return ValorTotal() + ValorComissao();
         }
-
 
         public void EfetuarPagamento(decimal valor)
         {
@@ -101,7 +90,6 @@ namespace Restaurante.Classes
             {
                 Console.WriteLine($"Valor restante: R${ValorFinal() - ValorPago}");
             }
-
         }
 
         public bool FecharComanda()
@@ -127,40 +115,10 @@ namespace Restaurante.Classes
             return Aberta;
         }
 
-        public void ImprimirComanda()
-        {
-            StringBuilder newString = new StringBuilder();
-
-            newString.Append('-', 20);
-            newString.AppendLine();
-
-            foreach (var item in Pedidos)
-            {
-                foreach (var item2 in item.Produtos)
-                {
-
-                    newString.AppendFormat("{0} - {1} - {2}", item2.Produto.Nome, item2.Quantidade, item2.ValorItemPedido());
-                    newString.AppendLine();
-
-                }
-
-            }
-            newString.Append('-', 20);
-            newString.AppendLine();
-            newString.AppendLine("Valor: " + ValorFinal());
-            newString.AppendLine("Valor Pago: " + ValorPago);
-
-            var comanda = newString.ToString();
-
-            Console.WriteLine(comanda);
-
-
-        }
 
         public override string ToString()
         {
             StringBuilder newString = new StringBuilder();
-
             newString.Append('-', 20);
             newString.AppendLine();
 
@@ -168,10 +126,8 @@ namespace Restaurante.Classes
             {
                 foreach (var item2 in item.Produtos)
                 {
-
                     newString.AppendFormat("{0} - {1} - {2}", item2.Produto.Nome, item2.Quantidade, item2.ValorItemPedido());
                     newString.AppendLine();
-
                 }
 
             }
@@ -181,12 +137,8 @@ namespace Restaurante.Classes
             newString.AppendLine("Valor Pago: " + ValorPago);
 
             return newString.ToString();
-
-
         }
-
     }
-
 }
 
 

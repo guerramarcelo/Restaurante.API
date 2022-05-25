@@ -17,15 +17,9 @@ namespace Restaurante.Classes
             Preco = preco;
             Nome = nome;
             Tipo = tipo;
-
-        }
-          
-
+        }        
         public string Nome { get; private set; }
-
         public decimal Preco { get; private set; }
-
-
         public enum TipoProdutoEnum
         {
 
@@ -34,12 +28,7 @@ namespace Restaurante.Classes
             Sobremesa
 
         }
-
         public TipoProdutoEnum Tipo { get; private set; }
-
-
-
     }
-
 
 }

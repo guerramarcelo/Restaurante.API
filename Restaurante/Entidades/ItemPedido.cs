@@ -9,32 +9,23 @@ namespace Restaurante.Classes
 {
     public class ItemPedido 
     {
-
         public Guid Id { get; private set; }
 
         public ItemPedido( Produto produto,  int quantidade = 1 )
         {
             Id = Guid.NewGuid();
             Quantidade = quantidade;
-            Produto = produto;
-                                             
+            Produto = produto;                                             
         }
 
-
-
-        public Produto Produto { get; private set; }
-       
+        public Produto Produto { get; private set; }       
         public int Quantidade { get; private set; }
         
-
         public decimal ValorItemPedido()
         {
             var valorItemPedido = Produto.Preco * Quantidade;
             return valorItemPedido;
-        } 
-         
-    
-
+        }         
     }
 }
 

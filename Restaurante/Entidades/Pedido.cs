@@ -8,35 +8,25 @@ namespace Restaurante.Classes
 {
     public class Pedido
     {
-
         public Pedido()
         {
             Id = Guid.NewGuid();
             HoraPedido = DateTime.Now;
             Produtos = new List<ItemPedido>();
         }
-
-
-
         public Guid Id { get; private set; }
-
         public List<ItemPedido> Produtos { get; private set; }
-
-
         public DateTime HoraPedido { get; private set; }
-
 
         public void AdicionarItemPedido(ItemPedido itemPedido)
         {
             Produtos.Add(itemPedido);
         }
 
-
         public void RemoverItemPedido(ItemPedido itemPedido)
         {
             Produtos.Remove(itemPedido);
         }
-
 
         public decimal ValorPedido()
         {
@@ -46,10 +36,6 @@ namespace Restaurante.Classes
                 total = total + itemPedido.ValorItemPedido();
             }
             return total;
-
         }
-
-
-
     }
 }

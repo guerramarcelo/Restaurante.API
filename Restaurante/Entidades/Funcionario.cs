@@ -8,19 +8,6 @@ namespace Restaurante.Classes
         protected string Nome { get; set; }
         protected string Cpf { get; set; }
         protected decimal Salario { get; set; } 
-
-
-        public Funcionario()
-        {
-        
-        }
-
-        public virtual void Atender(int nrmesa)
-        {
-            
-        }
-
-
         
     }
 }

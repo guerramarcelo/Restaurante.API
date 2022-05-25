@@ -55,18 +55,12 @@ namespace Restaurante
             //Arquivo arquivo = new Arquivo();            
             //arquivo.CriarArquivoStream(caminho, comanda1);
 
-
-
         }
-
-
 
         public static void Escrever(string nomeProduto, decimal valorItemPedido)
         {
             Console.WriteLine(nomeProduto + " - " + valorItemPedido);
         }
-
-
 
     }
 }

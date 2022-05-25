@@ -17,16 +17,12 @@ namespace Restaurante.Classes
             {
                 Console.WriteLine(retorno);
             }
-
-        }
-
-        
+        }        
 
         public void CriarArquivoStream(string caminho, object conteudo)
         {
             if (!File.Exists(caminho))
-            {
-                
+            {                
                 var temp = conteudo.ToString();
                 List<string> linhas = new List<string>();
 
@@ -45,11 +41,6 @@ namespace Restaurante.Classes
                 }
 
             }
-        }
-
-
-  
-
+        }        
     }
-
 }
