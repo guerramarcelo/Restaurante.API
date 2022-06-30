@@ -2,6 +2,6 @@
 {
     public class PagamentoInput
     {
-        public decimal Valor { get; set; }
+        public decimal ValorPago { get; set; }
     }
 }

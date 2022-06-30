@@ -2,11 +2,23 @@
 {
     public class PedidoInput
     {
-        public List<ItemPedidoInput> Items { get; set; }
+        public Guid Id { get; set; }
+        public Guid ComandaId { get; set; }
+        public DateTime Hora { get; set; }        
     }
+
+
     public class ItemPedidoInput
-    {
+    {   
+        public Guid Id { get; set; }
         public Guid ProdutoId { get; set; }
         public int Quantidade { get; set; }
+        public Guid PedidoId { get; set; }          
     }
+
+
+
+
 }
+
+

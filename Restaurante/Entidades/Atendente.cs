@@ -9,7 +9,8 @@ namespace Restaurante.Classes
         {
             Nome = nome;
             Cpf = cpf;
-            Salario = salario;            
+            Salario = salario; 
+            Id = Guid.NewGuid();
         }
         public Atendente()
         {
@@ -17,11 +18,10 @@ namespace Restaurante.Classes
             Cpf = String.Empty;
             Salario = 0.0M;
         }
-        public int Id { get; set; }         
-        public string Nome { get; set; }
-        public string Cpf { get; set; }
-        public decimal Salario { get; set; }
-        public decimal PorcentagemComissao { get; set; }
-
+        public Guid Id { get; private set; }         
+        public string Nome { get; private set; }
+        public string Cpf { get; private set; }
+        public decimal Salario { get; private set; }
+        public decimal PorcentagemComissao { get;set; }
     }  
 }
