@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante", "Restaurante\Restaurante.csproj", "{64804F60-C0A4-4C23-A8A7-DB217D960C22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurante.API", "Restaurante.API\Restaurante.API.csproj", "{D18AAF37-DB30-40F0-8E12-7D3459522AD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurante.API", "Restaurante.API\Restaurante.API.csproj", "{D18AAF37-DB30-40F0-8E12-7D3459522AD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
