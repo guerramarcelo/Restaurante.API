@@ -24,7 +24,7 @@ namespace RestauranteAPI.Controllers
 
         [HttpPost()]
         public ActionResult CriarProduto(ProdutoInput input)
-        {            
+        {
             string query = "insert into [Produto] (Nome, Preco, Tipo) values(@Nome, @Preco, @Tipo)";
             SqlConnection con = new SqlConnection(connectionString);
             con.Open();
@@ -33,20 +33,6 @@ namespace RestauranteAPI.Controllers
             cmd.Parameters.AddWithValue("@Preco", input.Preco);
             cmd.Parameters.AddWithValue("@Tipo", input.Tipo);
             cmd.ExecuteNonQuery();
-
-            var errorOutput = new ErrorOutput();
-            if (string.IsNullOrEmpty(input.Nome))
-                errorOutput.AddError("Nome é obrigatório");
-
-            if ((input.Preco == 0.0M))
-                errorOutput.AddError("Preço é obrigatório");
-
-            if (input.Tipo < 0)
-                errorOutput.AddError("Tipo é obrigatório");
-
-            if (errorOutput.HasErrors)
-                return BadRequest(errorOutput);           
-
             return Ok();
         }
 
@@ -104,18 +90,21 @@ namespace RestauranteAPI.Controllers
 
         [HttpPut("id")]
         public ActionResult UpdateProduto(Guid id, [FromBody] ProdutoInput input)
+
         {
             SqlConnection con = new SqlConnection(connectionString);
             con.Open();
-            string query = "UPDATE [Produto] SET Nome = @Nome, Preco = @Preco, Tipo = @Tipo WHERE Id = @Id";
-            SqlCommand cmd = new(query, con);
-            cmd.Parameters.AddWithValue("@Nome", input.Nome);
-            cmd.Parameters.AddWithValue("@Preco", input.Preco);
-            cmd.Parameters.AddWithValue("@Tipo", input.Tipo);
-            cmd.Parameters.AddWithValue("@Id", id);
-            cmd.ExecuteNonQuery();
-            return Ok();
-        }
+            string query = "SELECT * from [Produto]";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader data = cmd.ExecuteReader();
+            StringBuilder newString = new StringBuilder();
 
+            foreach (var item in data)
+            {
+                newString.AppendFormat("Id: {0}, Nome: {1}, Preco: {2}, Tipo: {3}", data["Id"], data["Nome"], data["Preco"], data["Tipo"]);
+                newString.AppendLine();
+            }
+            return Ok(newString.ToString());
+        }
     }
 }

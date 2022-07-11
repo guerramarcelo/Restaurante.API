@@ -16,9 +16,6 @@
         public Guid PedidoId { get; set; }          
     }
 
-
-
-
 }
 
 

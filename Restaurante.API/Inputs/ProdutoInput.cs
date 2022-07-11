@@ -10,5 +10,6 @@ namespace Restaurante.API.Inputs
         public decimal Preco { get; set; }
         public TipoProdutoEnum Tipo { get; set; }
         public Guid Id { get; set; }
+
     }
 }
