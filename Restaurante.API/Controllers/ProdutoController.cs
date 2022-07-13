@@ -5,7 +5,6 @@ using static Restaurante.Classes.Produto;
 using Dapper;
 using Restaurante.Classes;
 using System.Data.SqlClient;
-using System.Configuration;
 using System.Text;
 
 
@@ -25,86 +24,61 @@ namespace RestauranteAPI.Controllers
         [HttpPost()]
         public ActionResult CriarProduto(ProdutoInput input)
         {
-            string query = "insert into [Produto] (Nome, Preco, Tipo) values(@Nome, @Preco, @Tipo)";
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Nome", input.Nome);
-            cmd.Parameters.AddWithValue("@Preco", input.Preco);
-            cmd.Parameters.AddWithValue("@Tipo", input.Tipo);
-            cmd.ExecuteNonQuery();
-            return Ok();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var parameters = new { nome = input.Nome, preco = input.Preco, tipo = input.Tipo };
+                var sql = "INSERT INTO [Produto] (Nome, Preco, Tipo) VALUES (@nome, @preco, @tipo)";
+                var result = connection.Query(sql, parameters);
+                return Ok();
+            }
         }
-
 
         [HttpGet()]
         public ActionResult GetProdutos()
-        {
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
-            string query = "SELECT * from [Produto]";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader data = cmd.ExecuteReader();
-            StringBuilder newString = new StringBuilder();
-
-            foreach (var item in data)
+        {           
+            using (var connection = new SqlConnection(connectionString))
             {
-                newString.AppendFormat("Id: {0}, Nome: {1}, Preco: {2}, Tipo: {3}", data["Id"], data["Nome"], data["Preco"], data["Tipo"]);
-                newString.AppendLine();
-            }
-            return Ok(newString.ToString());
+                var sql = "SELECT * FROM [Produto]";
+                var produtos = connection.Query<Produto>(sql);                      
+                return Ok(produtos);
+            }           
         }
 
         [HttpGet("id")]
         public ActionResult GetProduto(Guid id)
         {
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
-            string query = "SELECT * from [Produto] WHERE Id = @Id";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Id", id);
-
-            SqlDataReader data = cmd.ExecuteReader();
-            StringBuilder newString = new StringBuilder();
-
-            foreach (var item in data)
+            using (var connection = new SqlConnection(connectionString))
             {
-                newString.AppendFormat("Id: {0}, Nome: {1}, Preco: {2}, Tipo: {3}", data["Id"], data["Nome"], data["Preco"], data["Tipo"]);
-                newString.AppendLine();
+                var parameters = new { Id = id };
+                var sql = "select * from [Produto] where Id = @id ";
+                var result = connection.Query(sql, parameters);
+                return Ok(result);
             }
-            return Ok(newString.ToString());
         }
 
         [HttpDelete("id")]
         public ActionResult DeleteProduto(Guid id)
         {
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
-            string query = "DELETE FROM [Produto] WHERE Id = @Id";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Id", id);
-            cmd.ExecuteNonQuery();
-            return Ok();
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var parameters = new { Id = id };
+                var sql = "DELETE FROM [Produto] WHERE Id = @id";
+                var affectedRows = connection.Execute(sql, parameters);
+                return Ok (affectedRows);
+            }
         }
-
 
         [HttpPut("id")]
         public ActionResult UpdateProduto(Guid id, [FromBody] ProdutoInput input)
-
         {
-            SqlConnection con = new SqlConnection(connectionString);
-            con.Open();
-            string query = "SELECT * from [Produto]";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader data = cmd.ExecuteReader();
-            StringBuilder newString = new StringBuilder();
-
-            foreach (var item in data)
+            using (var connection = new SqlConnection(connectionString))
             {
-                newString.AppendFormat("Id: {0}, Nome: {1}, Preco: {2}, Tipo: {3}", data["Id"], data["Nome"], data["Preco"], data["Tipo"]);
-                newString.AppendLine();
+                var parameters = new { Id = id, nome = input.Nome, preco = input.Preco, tipo = input.Tipo};
+                var sql = "UPDATE [Produto] SET Nome = @nome, Preco = @preco, Tipo = @tipo WHERE Id = @id";
+                var result = connection.Query(sql, parameters);
+                return Ok();
             }
-            return Ok(newString.ToString());
         }
+
     }
 }

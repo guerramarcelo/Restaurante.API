@@ -18,6 +18,14 @@ namespace Restaurante.Classes
             Tipo = tipo;
         }
 
+        public Produto (Guid id, string nome, decimal preco, TipoProdutoEnum tipo)
+        {
+            Id = id;
+            Nome = nome;
+            Preco = preco;
+            Tipo = tipo;
+        }
+
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }
         public TipoProdutoEnum Tipo { get; private set; }

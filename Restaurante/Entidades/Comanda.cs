@@ -7,7 +7,7 @@ namespace Restaurante.Classes
 {
     public class Comanda
     {
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; }      
         public Atendente Atendente { get; set; }
         public int NrMesa { get; private set; }
         public decimal ValorPago { get; private set; }
@@ -24,7 +24,7 @@ namespace Restaurante.Classes
             ValorPago = 0.0M;
             Aberta = false;
         }
-
+        
         public bool AbrirComanda()
         {
             Aberta = true;
