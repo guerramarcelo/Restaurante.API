@@ -26,57 +26,58 @@ namespace RestauranteAPI.Controllers
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                var parameters = new { nome = input.Nome, preco = input.Preco, tipo = input.Tipo };
+                Produto produto = new(input.Nome, input.Preco, input.Tipo);
+                var parameters = new { nome = produto.Nome, preco = produto.Preco, tipo = produto.Tipo };
                 var sql = "INSERT INTO [Produto] (Nome, Preco, Tipo) VALUES (@nome, @preco, @tipo)";
-                var result = connection.Query(sql, parameters);
-                return Ok();
+                var resultado = connection.Query(sql, parameters);
+                return Ok(resultado);
             }
         }
 
-        [HttpGet()]
-        public ActionResult GetProdutos()
+        [HttpGet("ObterProdutos")]
+        public ActionResult ObterProdutos()
         {           
             using (var connection = new SqlConnection(connectionString))
             {
                 var sql = "SELECT * FROM [Produto]";
-                var produtos = connection.Query<Produto>(sql);                      
-                return Ok(produtos);
+                var resultado = connection.Query<Produto>(sql);                      
+                return Ok(resultado);
             }           
         }
 
-        [HttpGet("id")]
-        public ActionResult GetProduto(Guid id)
+        [HttpGet("{id}/ObterProduto")]
+        public ActionResult ObterProduto(Guid id)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 var parameters = new { Id = id };
                 var sql = "select * from [Produto] where Id = @id ";
-                var result = connection.Query(sql, parameters);
-                return Ok(result);
+                var resultado = connection.Query<Produto>(sql, parameters);
+                return Ok(resultado);
             }
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public ActionResult DeleteProduto(Guid id)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 var parameters = new { Id = id };
                 var sql = "DELETE FROM [Produto] WHERE Id = @id";
-                var affectedRows = connection.Execute(sql, parameters);
-                return Ok (affectedRows);
+                var resultado = connection.Execute(sql, parameters);
+                return Ok (resultado);
             }
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public ActionResult UpdateProduto(Guid id, [FromBody] ProdutoInput input)
         {
             using (var connection = new SqlConnection(connectionString))
             {
                 var parameters = new { Id = id, nome = input.Nome, preco = input.Preco, tipo = input.Tipo};
                 var sql = "UPDATE [Produto] SET Nome = @nome, Preco = @preco, Tipo = @tipo WHERE Id = @id";
-                var result = connection.Query(sql, parameters);
-                return Ok();
+                var resultado = connection.Query<Produto>(sql, parameters);
+                return Ok(resultado);
             }
         }
 

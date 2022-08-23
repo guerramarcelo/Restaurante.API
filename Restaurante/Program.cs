@@ -39,7 +39,7 @@ namespace Restaurante
                 Pedidos.Add(pedido2);
             }
 
-            Atendente atendente1 = new("Marcelo", "1234", 800.0M);
+            Atendente atendente1 = new("Marcelo", "1234", 800.0M, 10);
 
             Comanda comanda1 = new(1, atendente1);
             comanda1.AbrirComanda();

@@ -25,6 +25,11 @@ namespace Restaurante.Classes
             Preco = preco;
             Tipo = tipo;
         }
+        public Produto()
+        {
+
+        }
+
 
         public string Nome { get; private set; }
         public decimal Preco { get; private set; }

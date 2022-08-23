@@ -8,12 +8,13 @@ namespace Restaurante.Classes
     public class Comanda
     {
         public Guid Id { get; private set; }      
-        public Atendente Atendente { get; set; }
+        public Atendente Atendente { get; private set; }
         public int NrMesa { get; private set; }
         public decimal ValorPago { get; private set; }
         public bool Aberta { get; private set; }
         public List<Pedido> Pedidos { get; private set; }
         public decimal Valor => ValorFinal();
+        
 
         public Comanda(int nrMesa, Atendente atendente)
         {
@@ -24,6 +25,14 @@ namespace Restaurante.Classes
             ValorPago = 0.0M;
             Aberta = false;
         }
+        public Comanda (int nrMesa)
+        {
+            Id = Guid.NewGuid();
+            Pedidos = new List<Pedido>();                 
+        }
+
+
+
         
         public bool AbrirComanda()
         {
@@ -129,8 +138,8 @@ namespace Restaurante.Classes
                     newString.AppendFormat("{0} - {1} - {2}", item2.Produto.Nome, item2.Quantidade, item2.ValorItemPedido());
                     newString.AppendLine();
                 }
-
             }
+
             newString.Append('-', 20);
             newString.AppendLine();
             newString.AppendLine("Valor: " + ValorFinal());

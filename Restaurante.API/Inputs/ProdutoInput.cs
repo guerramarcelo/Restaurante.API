@@ -1,6 +1,4 @@
-﻿using Dapper;
-using Restaurante.Classes;
-using static Restaurante.Classes.Produto;
+﻿using static Restaurante.Classes.Produto;
 
 namespace Restaurante.API.Inputs
 {

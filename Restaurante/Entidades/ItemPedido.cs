@@ -15,17 +15,22 @@ namespace Restaurante.Classes
         {
             Id = Guid.NewGuid();
             Quantidade = quantidade;
-            Produto = produto;                                             
+            Produto = produto;            
+        }              
+        public ItemPedido()
+        {
+            Id= Guid.NewGuid();
         }
 
-        public Produto Produto { get; private set; }       
-        public int Quantidade { get; private set; }
+        public Produto Produto { get;  set; }       
+        public int Quantidade { get;  set; }
         
         public decimal ValorItemPedido()
         {
             var valorItemPedido = Produto.Preco * Quantidade;
             return valorItemPedido;
-        }         
+        }
+
     }
 }
 
